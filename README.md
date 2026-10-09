@@ -17,7 +17,7 @@ flowchart LR
     P --> S[Shadow alert + explanation]
 ```
 
-The agent logs each LLM call and tool call. At every checkpoint, the predictor uses only information already observed—latency, retries, tool errors, token counts, repeated calls, and related runtime features—to return a failure-risk probability. It never uses the final answer or final outcome as a feature.
+The agent logs each LLM call and tool call. At every checkpoint, the predictor uses only information already observed: latency, retries, tool errors, token counts, repeated calls, and related runtime features to return a failure-risk probability. It never uses the final answer or final outcome as a feature.
 
 ## Results
 
