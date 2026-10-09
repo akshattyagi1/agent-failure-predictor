@@ -104,7 +104,7 @@ Train a baseline model:
 python -m models.train_logistic_regression --help
 ```
 
-For real-agent evaluation, use the versioned task banks in `data/tasks/`. The V3 bank is held out and must not be used for fitting or threshold selection; see [its guide](docs/HELD_OUT_TASK_BANK_V3_README.md).
+For real-agent evaluation, use the versioned task banks in `data/tasks/`. The V3 bank is held out and must not be used for fitting or threshold selection. The project manual explains the evaluation workflow.
 
 ## Repository map
 
@@ -136,6 +136,4 @@ tests/                    Automated regression tests
 - The predictor needs new labelled telemetry before it should be trusted for another model, agent framework, or workflow.
 - A future AgentHub integration would use adapters that normalize LangChain/CrewAI/custom-agent events into this telemetry schema.
 
-See [current status](project_documentation/CURRENT_STATUS.md) for the precise project state and [the project journey](project_documentation/PROJECT_JOURNEY.md) for the build history.
-
-For a beginner-friendly walkthrough of the full workflow and GitHub publishing steps, read the [project manual](docs/PROJECT_MANUAL.md).
+For a beginner-friendly walkthrough of the full workflow and GitHub publishing steps, read the [project manual](docs/PROJECT_MANUAL.md). For detailed experiment evidence, see [the results](project_documentation/EXPERIMENT_RESULTS.md).
