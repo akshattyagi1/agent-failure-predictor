@@ -2,7 +2,7 @@
 
 An end-to-end ML project that observes a local tool-using LLM agent, converts its runtime logs into leakage-safe features, and estimates whether the current run is likely to fail.
 
-It is intentionally a research prototype—not a claim that one model can predict failure for every agent framework. The project demonstrates the full loop: agent telemetry, data generation, model training, live shadow-mode inference, explanations, and genuinely held-out evaluation.
+It is intentionally a research prototype and not a claim that one model can predict failure for every agent framework. The project demonstrates the full loop: agent telemetry, data generation, model training, live shadow-mode inference, explanations, and genuinely held-out evaluation.
 
 ## What it does
 
