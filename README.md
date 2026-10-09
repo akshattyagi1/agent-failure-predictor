@@ -81,7 +81,7 @@ agent-run "List customers with a balance over 1000." --model <your-ollama-model>
 
 The agent needs a model that can reliably follow the system prompt and call tools. Native Ollama tool calling is preferred; the runner also supports a narrow JSON-shaped fallback for smaller local models. Quality will vary: a weak model may answer without using a tool, produce malformed tool arguments, or struggle with the required schema-discovery step before SQL. Those behaviors are useful telemetry, but they can lower task success.
 
-The **failure predictor** is a separate local scikit-learn model trained on this project's telemetry distribution. It will run for another Ollama model because the feature schema is the same, but its probabilities are not automatically calibrated for that new model. Collect and label that model's runs before treating its alert scores as reliable.
+The **failure predictor** is a separate local scikit-learn model trained on this project's telemetry distribution. It can score another Ollama model because the feature schema is the same, but its probabilities are not calibrated for models outside the configurations evaluated in this repository.
 
 ## Reproduce the project
 
@@ -129,11 +129,10 @@ tests/                    Automated regression tests
 - **Deterministic judging:** real-agent tasks have version-controlled expected answers.
 - **Honest held-out evaluation:** V3 is separate from model-development data.
 
-## Limitations and next steps
+## Scope and limitations
 
 - This is a local single-agent prototype, not a framework-agnostic production service.
 - Current results are specific to the local agent, tools, task banks, and Ollama configurations tested here.
-- The predictor needs new labelled telemetry before it should be trusted for another model, agent framework, or workflow.
-- A future AgentHub integration would use adapters that normalize LangChain/CrewAI/custom-agent events into this telemetry schema.
+- The predictor's scores are not calibrated for a different LLM, agent framework, or workflow without separate evaluation data.
 
-For a beginner-friendly walkthrough of the full workflow and GitHub publishing steps, read the [project manual](docs/PROJECT_MANUAL.md). For detailed experiment evidence, see [the results](project_documentation/EXPERIMENT_RESULTS.md).
+Technical detail is available in the [project manual](docs/PROJECT_MANUAL.md). Detailed experiment evidence is available in [the results](project_documentation/EXPERIMENT_RESULTS.md).
