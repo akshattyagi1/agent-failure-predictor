@@ -1,0 +1,165 @@
+RUNNER.PY — HOW THE AGENT RUNS
+================================
+
+Purpose
+-------
+runner.py is the agent's conductor. It receives one user task, sends it to the
+local Llama model, executes any tools Llama requests, records telemetry, and
+returns the final answer.
+
+The important idea: Llama does not execute Python tools by itself. Llama only
+asks for a tool. runner.py receives that request and runs the Python function.
+
+
+1. IMPORTS
+----------
+argparse: reads a task and options from the terminal.
+time: measures how long calls take.
+uuid: creates a unique identifier for every run.
+datetime: records when a run began.
+Path: represents folders safely.
+ollama.chat: sends a conversation to the local Ollama model.
+
+The imports from this project are:
+
+- RunEvent and StepEvent: the shapes of the telemetry records.
+- TelemetryCollector: writes telemetry records to JSONL files.
+- AVAILABLE_TOOLS: maps each allowed tool name to a Python function.
+- initialise_demo_data: creates the small document and SQLite database if
+  they do not already exist.
+
+
+2. SYSTEM_PROMPT
+----------------
+SYSTEM_PROMPT tells Llama its role and what tools it can use. It gives rules
+such as using calculate for arithmetic and not inventing a tool result.
+
+This is sent as a "system" message before the user's task. It is guidance,
+not Python logic: Llama can request a tool, but Python still controls whether
+and how that tool runs.
+
+
+3. classify_task(task)
+----------------------
+This small function assigns a rough task category using keywords:
+
+- calculation
+- database_lookup
+- document_lookup
+- general
+
+This category is stored in telemetry. It lets us later ask questions such as:
+"Does the agent fail more often on database tasks than arithmetic tasks?"
+
+It is deliberately simple for now. A later version could use a classifier or
+semantic embeddings instead of keyword matching.
+
+
+4. run_agent(...)
+------------------
+This is the central function. Calling it means: "perform one agent run."
+
+Arguments:
+
+- task: the user's question, for example "What is 25 * 17?"
+- model: the local Ollama model name, for example "llama3.2:3b"
+- telemetry_directory: the folder where log files are written
+- max_steps: the safety limit on Llama/tool cycles
+
+A run is one complete attempt to answer one task. Each run receives a unique
+run_id, made with uuid.uuid4(). Every event produced during that attempt uses
+the same run_id.
+
+
+5. SETUP AT THE START OF A RUN
+------------------------------
+The function first:
+
+1. Makes sure local demo data exists.
+2. Creates a TelemetryCollector.
+3. Creates the run_id.
+4. records the start time.
+5. creates counters for LLM calls, tool calls, errors, and tokens.
+6. builds the initial conversation in the messages list.
+
+The initial messages list is like this:
+
+    system: instructions for Llama
+    user: the user's task
+
+The list grows as Llama replies and tools return results. It is the short-term
+conversation memory for this one run.
+
+
+6. THE AGENT LOOP
+-----------------
+The for loop runs from step 1 up to max_steps. Each iteration asks:
+
+    "What should Llama do next, based on the conversation so far?"
+
+The call is:
+
+    response = chat(model=model, messages=messages, tools=...)
+
+The tools argument provides Ollama with descriptions of the available Python
+functions. Ollama can then return normal text or structured tool_calls.
+
+Immediately after the LLM call, runner.py records an llm_call StepEvent. This
+captures its latency and, when Ollama supplies them, token counts.
+
+
+7. TWO POSSIBLE LLM RESPONSES
+-----------------------------
+A. No tool calls
+
+If response.message.tool_calls is empty, Llama considers its answer complete.
+runner.py saves response.message.content in answer and breaks out of the loop.
+
+B. One or more tool calls
+
+If Llama asks for a tool, runner.py loops through those requests. For each one:
+
+1. Get the requested tool name, such as "calculate".
+2. Look up that name in AVAILABLE_TOOLS.
+3. Call the matching Python function with the arguments Llama supplied.
+4. Measure whether it succeeded and how long it took.
+5. Write a tool_call StepEvent.
+6. Add the tool result to messages.
+
+The next loop iteration calls Llama again. Llama can read the tool result and
+either request another tool or write the final answer.
+
+
+8. ERROR HANDLING
+-----------------
+Each tool call is protected with try/except. If a tool raises an error:
+
+- the error becomes a tool result that Llama can see;
+- the tool event is marked unsuccessful;
+- num_tool_errors increases.
+
+The entire run is also protected with try/except. If Ollama or the runner has
+an unexpected error, failure_type is recorded. If the loop reaches max_steps,
+failure_type becomes "max_steps_exceeded".
+
+These are early examples of the failures we will later predict.
+
+
+9. END OF A RUN
+---------------
+finally always writes a RunEvent, even if an error happened. The RunEvent is a
+summary: number of LLM/tool calls, errors, total tokens, total time, whether a
+final answer exists, and whether the run failed.
+
+If the run failed, the function raises RuntimeError after saving telemetry.
+Otherwise it returns the final answer as a string.
+
+
+10. main()
+----------
+main() turns a terminal command into a run_agent call. For example:
+
+    agent-run "What is 25 * 17?"
+
+The default model is llama3.2:3b. --model, --telemetry-dir, and --max-steps
+can override the defaults.

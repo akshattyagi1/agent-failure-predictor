@@ -1,0 +1,30 @@
+{"task_id":"real_calc_001","task_type":"calculation","task":"What is 18 multiplied by 7?","evaluation":{"type":"numeric","expected":126}}
+{"task_id":"real_calc_002","task_type":"calculation","task":"Calculate (120 + 35) * 4.","evaluation":{"type":"numeric","expected":620}}
+{"task_id":"real_calc_003","task_type":"calculation","task":"What is 144 divided by 12, plus 8?","evaluation":{"type":"numeric","expected":20}}
+{"task_id":"real_doc_001","task_type":"document_lookup","task":"Which Australian city is mentioned in the documents? Use the document search tool.","evaluation":{"type":"contains_all","expected":["sydney"]}}
+{"task_id":"real_doc_002","task_type":"document_lookup","task":"According to the local document, what does telemetry record? Use the document search tool.","evaluation":{"type":"contains_all","expected":["latency","retries","tool calls","errors"]}}
+{"task_id":"real_doc_003","task_type":"document_lookup","task":"What is Agent Hub described as in the knowledge base? Use the document search tool.","evaluation":{"type":"contains_all","expected":["observability"]}}
+{"task_id":"real_db_001","task_type":"database_lookup","task":"Which customer has the highest balance? Use the database tool.","evaluation":{"type":"contains_all","expected":["jordan","2100"]}}
+{"task_id":"real_db_002","task_type":"database_lookup","task":"How many customers are in the database? Use the database tool.","evaluation":{"type":"numeric","expected":3}}
+{"task_id":"real_db_003","task_type":"database_lookup","task":"List the customers with a balance over 1000. Use the database tool.","evaluation":{"type":"contains_all","expected":["asha","jordan"]}}
+{"task_id":"real_calc_004","task_type":"calculation","task":"What is 36 multiplied by 14?","evaluation":{"type":"numeric","expected":504}}
+{"task_id":"real_calc_005","task_type":"calculation","task":"Calculate 250 minus 73.","evaluation":{"type":"numeric","expected":177}}
+{"task_id":"real_calc_006","task_type":"calculation","task":"Calculate (18 + 12) multiplied by 5.","evaluation":{"type":"numeric","expected":150}}
+{"task_id":"real_calc_007","task_type":"calculation","task":"What is 19 multiplied by 9, plus 7?","evaluation":{"type":"numeric","expected":178}}
+{"task_id":"real_calc_008","task_type":"calculation","task":"Calculate 81 divided by 9, multiplied by 6.","evaluation":{"type":"numeric","expected":54}}
+{"task_id":"real_calc_009","task_type":"calculation","task":"What is 450 divided by 15, plus 11?","evaluation":{"type":"numeric","expected":41}}
+{"task_id":"real_calc_010","task_type":"calculation","task":"Calculate (72 - 18) * 3.","evaluation":{"type":"numeric","expected":162}}
+{"task_id":"real_doc_004","task_type":"document_lookup","task":"What city is the planned initial deployment city? Use the document search tool.","evaluation":{"type":"contains_all","expected":["sydney"]}}
+{"task_id":"real_doc_005","task_type":"document_lookup","task":"Is Agent Hub described as a local or cloud project? Use the document search tool.","evaluation":{"type":"contains_all","expected":["local"]}}
+{"task_id":"real_doc_006","task_type":"document_lookup","task":"Name the project described in the knowledge base as an observability project. Use the document search tool.","evaluation":{"type":"contains_all","expected":["agent hub"]}}
+{"task_id":"real_doc_007","task_type":"document_lookup","task":"According to the document, does telemetry record latency? Use the document search tool.","evaluation":{"type":"contains_all","expected":["latency"]}}
+{"task_id":"real_doc_008","task_type":"document_lookup","task":"According to the document, does telemetry record retries and errors? Use the document search tool.","evaluation":{"type":"contains_all","expected":["retries","errors"]}}
+{"task_id":"real_doc_009","task_type":"document_lookup","task":"What does the document list alongside latency and retries? Use the document search tool.","evaluation":{"type":"contains_all","expected":["tool calls","errors"]}}
+{"task_id":"real_doc_010","task_type":"document_lookup","task":"What kind of project is Agent Hub according to the knowledge base? Use the document search tool.","evaluation":{"type":"contains_all","expected":["observability"]}}
+{"task_id":"real_db_004","task_type":"database_lookup","task":"Which customer has a balance of 900? Use the database tool.","evaluation":{"type":"contains_all","expected":["mina","900"]}}
+{"task_id":"real_db_005","task_type":"database_lookup","task":"What is Asha's balance? Use the database tool.","evaluation":{"type":"contains_all","expected":["asha","1450"]}}
+{"task_id":"real_db_006","task_type":"database_lookup","task":"What is Jordan's balance? Use the database tool.","evaluation":{"type":"contains_all","expected":["jordan","2100"]}}
+{"task_id":"real_db_007","task_type":"database_lookup","task":"Which customer has a balance below 1000? Use the database tool.","evaluation":{"type":"contains_all","expected":["mina","900"]}}
+{"task_id":"real_db_008","task_type":"database_lookup","task":"List every customer name in the database. Use the database tool.","evaluation":{"type":"contains_all","expected":["asha","mina","jordan"]}}
+{"task_id":"real_db_009","task_type":"database_lookup","task":"How many customers have a balance over 1000? Use the database tool.","evaluation":{"type":"numeric","expected":2}}
+{"task_id":"real_db_010","task_type":"database_lookup","task":"Which customer has the lowest balance? Use the database tool.","evaluation":{"type":"contains_all","expected":["mina","900"]}}

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-failure-predictor"
+version = "0.1.0"
+description = "A telemetry-first local LLM agent for failure prediction research."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "ollama>=0.6,<1",
+  "pydantic>=2.7,<3",
+  "pandas>=2.2,<3",
+  "matplotlib>=3.9,<4",
+  "scikit-learn>=1.5,<2",
+  "xgboost>=3.0,<4",
+  "shap>=0.51,<1",
+  "fastapi>=0.110,<1",
+  "uvicorn>=0.29,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+agent-run = "agent_failure_predictor.runner:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["agent_failure_predictor*"]

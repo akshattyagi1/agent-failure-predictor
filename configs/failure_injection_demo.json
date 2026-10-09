@@ -1,0 +1,11 @@
+{
+  "seed": 42,
+  "max_retries": 1,
+  "tool_timeout_probability": 0.15,
+  "tool_unavailable_probability": 0.05,
+  "invalid_arguments_probability": 0.05,
+  "no_results_probability": 0.05,
+  "added_latency_probability": 0.15,
+  "min_added_latency_ms": 250,
+  "max_added_latency_ms": 750
+}

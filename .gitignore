@@ -1,0 +1,31 @@
+# Python and local tooling
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.env
+
+# Runtime telemetry and seeded local databases
+telemetry/
+data/generated/
+data/environments/
+*.sqlite3
+
+# Generated training outputs. Keep source code in models/ and only the small
+# runtime bundle explicitly unignored below.
+models/logistic_regression/*
+models/logistic_regression_engineered/*
+models/model_comparison/*
+models/random_forest/*
+models/real_aware_comparison/*
+models/xgboost/*
+
+# Required for `uvicorn api.main:app` to run immediately after cloning.
+!models/logistic_regression_engineered/dataset_500_gradual_failures_v1/
+models/logistic_regression_engineered/dataset_500_gradual_failures_v1/*
+!models/logistic_regression_engineered/dataset_500_gradual_failures_v1/model.joblib
+!models/logistic_regression_engineered/dataset_500_gradual_failures_v1/metrics.json
+!models/logistic_regression_engineered/dataset_500_gradual_failures_v1/explanations/
+models/logistic_regression_engineered/dataset_500_gradual_failures_v1/explanations/*
+!models/logistic_regression_engineered/dataset_500_gradual_failures_v1/explanations/explanation_baseline.json

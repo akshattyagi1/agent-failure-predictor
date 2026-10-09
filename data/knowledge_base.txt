@@ -1,0 +1,3 @@
+Agent Hub is a local observability project.
+Sydney is the planned initial deployment city.
+Telemetry events record latency, retries, tool calls, and errors.

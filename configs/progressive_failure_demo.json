@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "max_retries": 2,
+  "progressive_timeout_probability": 1.0,
+  "progressive_timeout_attempts": 3,
+  "progressive_latency_increment_ms": 100,
+  "empty_result_probability": 0.0,
+  "malformed_result_probability": 0.0
+}

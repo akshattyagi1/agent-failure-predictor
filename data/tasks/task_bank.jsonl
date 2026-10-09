@@ -1,0 +1,9 @@
+{"task_id":"calc_001","task_type":"calculation","task":"What is 25 * 17?"}
+{"task_id":"calc_002","task_type":"calculation","task":"Calculate (120 + 35) * 4."}
+{"task_id":"calc_003","task_type":"calculation","task":"What is 144 / 12 + 8?"}
+{"task_id":"doc_001","task_type":"document_lookup","task":"Which Australian city is mentioned in the documents?"}
+{"task_id":"doc_002","task_type":"document_lookup","task":"What does the local document say telemetry records?"}
+{"task_id":"doc_003","task_type":"document_lookup","task":"What is Agent Hub described as in the knowledge base?"}
+{"task_id":"db_001","task_type":"database_lookup","task":"List customers in the database with a balance over 1000."}
+{"task_id":"db_002","task_type":"database_lookup","task":"Which customer has the highest balance? Use the database."}
+{"task_id":"db_003","task_type":"database_lookup","task":"How many customers are in the database?"}
